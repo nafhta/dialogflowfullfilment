@@ -46,26 +46,23 @@ app.post('/webhook', function(request, response)
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
  
-  function tellmeajoke()
-  {
-      return { "fulfillmentText": "This is a text response" };
-
-      console.log("cantidad " + Jokes.count());
-      Jokes.count().exec(function (err, count) 
-      {
-        var random = Math.floor(Math.random() * count)
-        console.log("random " + random);
-        Jokes.findOne().skip(random).exec(
-          function (err, result) 
-          {
-            console.log(result);
-            return { "fulfillmentText": "This is a text response" }
-          }); 
-      })
-  }
-
-  // Run the proper function handler based on the matched Dialogflow intent name
-  let intentMap = new Map();
-  intentMap.set('tellmeajoke', tellmeajoke);
-  
+  res.send(tellmeajoke);
 });
+
+function tellmeajoke()
+{
+    return { "fulfillmentText": "This is a text response" };
+
+    console.log("cantidad " + Jokes.count());
+    Jokes.count().exec(function (err, count) 
+    {
+      var random = Math.floor(Math.random() * count)
+      console.log("random " + random);
+      Jokes.findOne().skip(random).exec(
+        function (err, result) 
+        {
+          console.log(result);
+          return { "fulfillmentText": "This is a text response" }
+        }); 
+    })
+}
