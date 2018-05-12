@@ -48,6 +48,8 @@ app.post('/webhook', function(request, response)
  
   function tellmeajoke()
   {
+      return { "fulfillmentText": "This is a text response" };
+
       console.log("cantidad " + Jokes.count());
       Jokes.count().exec(function (err, count) 
       {
