@@ -1,6 +1,5 @@
 // See https://github.com/dialogflow/dialogflow-fulfillment-nodejs
 // for Dialogflow fulfillment library docs, samples, and to report issues
-'use strict';
  
 var express = require("express");
 var request = require("request");
@@ -36,7 +35,7 @@ var Jokes = mongoose.model('jokes', JokeSchema);
 
 mongoose.connect('mongodb://nafhta:redneural0336@ds131329.mlab.com:31329/aircache').then(() => 
 {
-    console.log("Successfully connected to the database");   
+  console.log("Successfully connected to the database");   
 }).catch(err => 
 {
     console.log(err);
