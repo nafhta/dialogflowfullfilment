@@ -4,8 +4,6 @@
 var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
-const {WebhookClient} = require('dialogflow-fulfillment');
-const {Card, Suggestion} = require('dialogflow-fulfillment');
 const mongoose  = require('mongoose');
 
 
@@ -43,39 +41,26 @@ mongoose.connect('mongodb://nafhta:redneural0336@ds131329.mlab.com:31329/aircach
     process.exit();
 });
 
-process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
-
-
 app.post('/webhook', function(request, response) 
 {
-  const agent = new WebhookClient({ request, response });
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
  
-  function welcome(agent) {
-    agent.add(`Welcome to my agent!`);
+  function tellmeajoke(agent)
+  {
+      console.log("cantidad " + Jokes.count());
+      Jokes.count().exec(function (err, count) 
+      {
+        var random = Math.floor(Math.random() * count)
+        console.log("random " + random);
+        Jokes.findOne().skip(random).exec(
+          function (err, result) 
+          {
+            console.log(result);
+            return { "fulfillmentText": "This is a text response" }
+          }); 
+      })
   }
- 
-  function fallback(agent) {
-    agent.add(`I didn't understand`);
-    agent.add(`I'm sorry, can you try again?`);
-    }
-    
-    function tellmeajoke(agent)
-    {
-        console.log("cantidad " + Jokes.count());
-        Jokes.count().exec(function (err, count) 
-        {
-          var random = Math.floor(Math.random() * count)
-          console.log("random " + random);
-          Jokes.findOne().skip(random).exec(
-            function (err, result) 
-            {
-              console.log(result);
-              agent.add(result.text);
-            })
-        })
-    }
 
   // Run the proper function handler based on the matched Dialogflow intent name
   let intentMap = new Map();
