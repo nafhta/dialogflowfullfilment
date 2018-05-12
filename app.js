@@ -19,7 +19,7 @@ app.listen(process.env.PORT || 3000, function() {
 });
 
 app.get("/", function(req, res) {
-    res.send({ "fulfillmentText": "This is a text response" });
+    res.json({ "fulfillmentText": "This is a text response" });
 });
 
 mongoose.Promise = global.Promise;
@@ -46,11 +46,12 @@ app.post('/webhook', function(request, response)
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
  
-  response.send(tellmeajoke);
+  response.json(tellmeajoke);
 });
 
 function tellmeajoke()
 {
+    console.log("respuesta");
     return { "fulfillmentText": "This is a text response" };
 
     console.log("cantidad " + Jokes.count());
