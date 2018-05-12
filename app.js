@@ -19,7 +19,7 @@ app.listen(process.env.PORT || 3000, function() {
 });
 
 app.get("/", function(req, res) {
-    res.send("Deployed!");
+    res.send({ "fulfillmentText": "This is a text response" });
 });
 
 mongoose.Promise = global.Promise;
