@@ -46,13 +46,14 @@ app.post('/webhook', function(request, response)
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
  
-  response.json(tellmeajoke);
+  console.log("respuesta");
+  response.writeHead(200, {"Content-Type": "application/json"});
+  response.json({ "fulfillmentText": "This is a text response" });
 });
 
 function tellmeajoke()
 {
-    console.log("respuesta");
-    return { "fulfillmentText": "This is a text response" };
+
 
     console.log("cantidad " + Jokes.count());
     Jokes.count().exec(function (err, count) 
