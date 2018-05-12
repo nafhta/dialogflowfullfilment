@@ -46,7 +46,7 @@ app.post('/webhook', function(request, response)
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
  
-  res.send(tellmeajoke);
+  response.send(tellmeajoke);
 });
 
 function tellmeajoke()
