@@ -46,7 +46,7 @@ app.post('/webhook', function(request, response)
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
  
-  function tellmeajoke(agent)
+  function tellmeajoke()
   {
       console.log("cantidad " + Jokes.count());
       Jokes.count().exec(function (err, count) 
@@ -66,5 +66,4 @@ app.post('/webhook', function(request, response)
   let intentMap = new Map();
   intentMap.set('tellmeajoke', tellmeajoke);
   
-  agent.handleRequest(intentMap);
 });
