@@ -41,20 +41,18 @@ mongoose.connect('mongodb://nafhta:redneural0336@ds131329.mlab.com:31329/aircach
     process.exit();
 });
 
-app.post('/webhook', function(request, response) 
+app.post('/webhook', function(request, res) 
 {
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
  
   console.log("respuesta");
-  response.writeHead(200, {"Content-Type": "application/json"});
-  response.json({ "fulfillmentText": "This is a text response" });
+  res.setHeader('Content-Type', 'application/json');
+  res.json({ "fulfillmentText": "This is a text response" });
 });
 
 function tellmeajoke()
 {
-
-
     console.log("cantidad " + Jokes.count());
     Jokes.count().exec(function (err, count) 
     {
