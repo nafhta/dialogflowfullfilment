@@ -65,8 +65,6 @@ app.post('/webhook', function(request, response)
   // Run the proper function handler based on the matched Dialogflow intent name
   let intentMap = new Map();
   intentMap.set('tellmeajoke', tellmeajoke);
-  intentMap.set('Default Welcome Intent', welcome);
-  intentMap.set('Default Fallback Intent', fallback);
   
   agent.handleRequest(intentMap);
 });
