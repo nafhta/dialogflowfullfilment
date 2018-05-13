@@ -46,14 +46,18 @@ app.post('/webhook', function(request, res)
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
  
-  console.log("respuesta");
+  
+  
+  if()
   res.setHeader('Content-Type', 'application/json');
   res.json({ "fulfillmentText": "This is a text response" });
+  
 });
 
-function tellmeajoke()
+
+
+function GetRandomJoke()
 {
-    console.log("cantidad " + Jokes.count());
     Jokes.count().exec(function (err, count) 
     {
       var random = Math.floor(Math.random() * count)
@@ -61,8 +65,7 @@ function tellmeajoke()
       Jokes.findOne().skip(random).exec(
         function (err, result) 
         {
-          console.log(result);
-          return { "fulfillmentText": "This is a text response" }
+          return result.text;
         }); 
     })
 }
