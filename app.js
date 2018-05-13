@@ -46,11 +46,31 @@ app.post('/webhook', function(request, res)
   console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
   console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
  
-  
-  
-  if()
   res.setHeader('Content-Type', 'application/json');
-  res.json({ "fulfillmentText": "This is a text response" });
+  
+  if(request.body.intent.displayName == "tellmeajoke")
+  {
+  	res.json({ "fulfillmentText": GetRandomJoke() });
+  }
+  
+  if(request.body.intent.displayName == "needacab")
+  {
+    res.json("fulfillmentMessages": [
+        {
+          "card": {
+            "title": "card title",
+            "subtitle": "card text",
+            "imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
+            "buttons": [
+              {
+                "text": "button text",
+                "postback": "https://assistant.google.com/"
+              }
+            ]
+          }
+        }
+      ]);
+  }
   
 });
 
